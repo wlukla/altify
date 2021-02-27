@@ -1,0 +1,7 @@
+{
+  "name": "altify",
+  "version": "1.0.0",
+  "main": "index.js",
+  "author": "wlukla <vladislav.danilochkin@gmail.com>",
+  "license": "MIT"
+}
