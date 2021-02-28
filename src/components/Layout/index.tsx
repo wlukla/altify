@@ -1,16 +1,31 @@
 import React from 'react';
 import styled from 'styled-components';
 
+import Button from '../Button';
+import authService from '../../services/authService';
+import useLoginState from '../../hooks/useLogin';
+
 import Navigation from './components/Navigation';
 
-const Layout: React.FC = ({ children }) => (
-  <AppContainer>
-    <Header>
-      <Navigation />
-    </Header>
-    <Main>{children}</Main>
-  </AppContainer>
-);
+const Layout: React.FC = ({ children }) => {
+  const [isUserLoggedIn, setIsUserLoggedIn] = useLoginState();
+
+  const handleLogOutClick = () => {
+    authService.logOut();
+    setIsUserLoggedIn(false);
+  };
+
+  return (
+    <AppContainer>
+      <Header>
+        <Navigation />
+
+        {isUserLoggedIn && <Button onClick={handleLogOutClick}>Log out</Button>}
+      </Header>
+      <Main>{children}</Main>
+    </AppContainer>
+  );
+};
 
 const AppContainer = styled.div`
   width: 100%;
@@ -28,6 +43,7 @@ const Header = styled.header`
   background-color: ${({ theme }) => theme.palette.secondary.main};
   display: flex;
   align-items: center;
+  justify-content: space-between;
 `;
 
 const Main = styled.main`

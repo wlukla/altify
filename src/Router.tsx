@@ -3,8 +3,7 @@ import { BrowserRouter, Switch, Route } from 'react-router-dom';
 
 import HomeView from './views/Home';
 import LoginView from './views/Login';
-import FavouritesView from './views/Favourites';
-import AlbumsView from './views/Albums';
+import LikedView from './views/Liked';
 
 const Router: React.FC = () => (
   <BrowserRouter>
@@ -15,11 +14,8 @@ const Router: React.FC = () => (
       <Route path="/login" exact>
         <LoginView />
       </Route>
-      <Route path="/favourites" exact>
-        <FavouritesView />
-      </Route>
-      <Route path="/albums" exact>
-        <AlbumsView />
+      <Route path="/liked" exact>
+        <LikedView />
       </Route>
     </Switch>
   </BrowserRouter>

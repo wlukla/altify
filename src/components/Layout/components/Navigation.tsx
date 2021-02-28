@@ -9,13 +9,7 @@ const Navigation: React.FC = () => (
         <Link to="/">Home</Link>
       </ListItem>
       <ListItem>
-        <Link to="/login">Login</Link>
-      </ListItem>
-      <ListItem>
-        <Link to="/favourites">Favourites</Link>
-      </ListItem>
-      <ListItem>
-        <Link to="/albums">Albums</Link>
+        <Link to="/liked">Liked</Link>
       </ListItem>
     </List>
   </Nav>
@@ -31,6 +25,7 @@ const List = styled.ul`
   margin: 0;
   display: flex;
   align-items: center;
+  list-style: none;
 `;
 
 const ListItem = styled.li`

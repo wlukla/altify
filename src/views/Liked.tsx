@@ -5,7 +5,7 @@ import apiService from '../services/apiService';
 
 import SongsList from '../components/SongsList';
 
-const FavouritesView: React.FC = () => {
+const LikedView: React.FC = () => {
   const [data, setData] = useState<Record<string, unknown> | void>();
 
   useEffect(() => {
@@ -25,4 +25,4 @@ const FavouritesView: React.FC = () => {
   );
 };
 
-export default FavouritesView;
+export default LikedView;

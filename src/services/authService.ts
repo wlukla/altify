@@ -47,7 +47,7 @@ class AuthService {
     window.open(url, '_self');
   }
 
-  async getToken(): Promise<void> {
+  async fetchToken(): Promise<void> {
     const queryParams = new URLSearchParams(location.search);
 
     const params = new URLSearchParams({
@@ -78,6 +78,50 @@ class AuthService {
         })
       );
     }
+  }
+
+  async refreshToken(refreshToken: string): Promise<string> {
+    const params = new URLSearchParams({
+      client_id: this.clientId,
+      grant_type: 'refresh_token',
+      refresh_token: refreshToken,
+    });
+
+    const resposne = await fetch('https://accounts.spotify.com/api/token', {
+      method: 'POST',
+      body: params,
+    });
+    const data = await resposne.json();
+
+    localStorage.setItem(
+      'tokenData',
+      JSON.stringify({
+        ...data,
+        expiresAt: parseInt(data.expires_in) * 1000 + Date.now(),
+      })
+    );
+
+    return data.access_token;
+  }
+
+  async getToken(): Promise<string | void> {
+    const localStorageTokenData = localStorage.getItem('tokenData');
+
+    if (!localStorageTokenData) return;
+
+    const { expiresAt, refresh_token, access_token } = JSON.parse(
+      localStorageTokenData
+    );
+
+    if (expiresAt < Date.now() && refresh_token) {
+      return this.refreshToken(refresh_token);
+    }
+
+    return access_token;
+  }
+
+  logOut() {
+    localStorage.removeItem('tokenData');
   }
 }
 
