@@ -21,6 +21,7 @@ const AppContainer = styled.div`
 `;
 
 const Header = styled.header`
+  padding: 0 3rem;
   width: 100%;
   height: 6rem;
   background-color: ${({ theme }) => theme.palette.secondary.main};

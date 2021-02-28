@@ -27,7 +27,7 @@ const Nav = styled.div`
 
 const List = styled.ul`
   height: 100%;
-  padding: 0 0 0 4rem;
+  padding: 0;
   margin: 0;
   display: flex;
   align-items: center;

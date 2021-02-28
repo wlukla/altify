@@ -1,6 +1,6 @@
 import { createRandomString, sha256, toBase64 } from '../utils';
 
-class SpotifyService {
+class AuthService {
   clientId: string;
 
   constructor(clientId?: string) {
@@ -8,7 +8,6 @@ class SpotifyService {
       throw new Error('CLIENT_ID env varibale is missing!');
     }
 
-    console.log(clientId);
     this.clientId = clientId;
   }
 
@@ -80,50 +79,8 @@ class SpotifyService {
       );
     }
   }
-
-  async fetchWithAuthorization(
-    url: string,
-    init?: RequestInit
-  ): Promise<Record<string, unknown> | void> {
-    const localStorageTokenData = localStorage.getItem('tokenData');
-
-    if (localStorageTokenData) {
-      const tokenData = JSON.parse(localStorageTokenData);
-
-      const response = await fetch(url, {
-        ...init,
-        headers: {
-          Authorization: `${tokenData.token_type} ${tokenData.access_token}`,
-        },
-      });
-
-      const data = await response.json();
-
-      return data;
-    }
-  }
-
-  async getLikedSongs(): Promise<Record<string, unknown> | void> {
-    const url = 'https://api.spotify.com/v1/me/tracks?offset=0&limit=20';
-
-    const data = await this.fetchWithAuthorization(url);
-
-    console.log(data);
-
-    return data;
-  }
-
-  async getUserAlbums(): Promise<Record<string, unknown> | void> {
-    const url = 'https://api.spotify.com/v1/me/tracks?offset=0&limit=20';
-
-    const data = await this.fetchWithAuthorization(url);
-
-    console.log(data);
-
-    return data;
-  }
 }
 
-const service = new SpotifyService(process.env.CLIENT_ID);
+const service = new AuthService(process.env.CLIENT_ID);
 
 export default service;

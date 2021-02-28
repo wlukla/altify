@@ -3,7 +3,7 @@ import styled from 'styled-components';
 
 import Layout from '../components/Layout';
 import Button from '../components/Button';
-import spotifyService from '../services/spotifyService';
+import spotifyService from '../services/authService';
 
 const HomeView: React.FC = () => {
   const handleButtonClick = () => {

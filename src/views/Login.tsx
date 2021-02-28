@@ -1,13 +1,18 @@
 import React, { useEffect } from 'react';
 
-import spotifyService from '../services/spotifyService';
+import Layout from '../components/Layout';
+import authService from '../services/authService';
 
 const LoginView: React.FC = () => {
   useEffect(() => {
-    spotifyService.getToken();
+    authService.getToken();
   }, []);
 
-  return <p>Login</p>;
+  return (
+    <Layout>
+      <p>Logging in, you will be redirected just now!</p>
+    </Layout>
+  );
 };
 
 export default LoginView;

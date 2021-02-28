@@ -1,13 +1,14 @@
 import React, { useState, useEffect } from 'react';
 
-import spotifyService from '../services/spotifyService';
+import Layout from '../components/Layout';
+import apiService from '../services/apiService';
 
 const AlbumsView: React.FC = () => {
   const [data, setData] = useState<Record<string, unknown> | void>();
 
   useEffect(() => {
     const func = async () => {
-      const res = await spotifyService.getUserAlbums();
+      const res = await apiService.getUserAlbums();
 
       setData(res);
     };
@@ -15,7 +16,11 @@ const AlbumsView: React.FC = () => {
     func();
   }, []);
 
-  return <p>{JSON.stringify(data, null, 2)}</p>;
+  return (
+    <Layout>
+      <p>{JSON.stringify(data, null, 2)}</p>
+    </Layout>
+  );
 };
 
 export default AlbumsView;
