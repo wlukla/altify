@@ -11,12 +11,7 @@ export const songsListState = atom<Item[]>({
   default: [],
 });
 
-export const currentSongState = atom({
-  key: 'currentSongState',
-  default: {},
-});
-
-export const isPlayingState = atom({
-  key: 'isPlayingState',
-  default: false,
+export const playbackState = atom<Spotify.PlaybackState | null>({
+  key: 'playbackState',
+  default: null,
 });

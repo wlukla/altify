@@ -6,6 +6,7 @@ import authService from '../../services/authService';
 import useLoginState from '../../hooks/useLogin';
 
 import Navigation from './components/Navigation';
+import Player from '../Player';
 
 const Layout: React.FC = ({ children }) => {
   const [isUserLoggedIn, setIsUserLoggedIn] = useLoginState();
@@ -23,6 +24,7 @@ const Layout: React.FC = ({ children }) => {
         {isUserLoggedIn && <Button onClick={handleLogOutClick}>Log out</Button>}
       </Header>
       <Main>{children}</Main>
+      {isUserLoggedIn && <Player />}
     </AppContainer>
   );
 };

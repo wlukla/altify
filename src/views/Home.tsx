@@ -1,13 +1,23 @@
 import React from 'react';
+import { useRecoilState } from 'recoil';
+import { useHistory } from 'react-router-dom';
 import styled from 'styled-components';
 
 import Layout from '../components/Layout';
 import Button from '../components/Button';
-import spotifyService from '../services/authService';
+import apiService from '../services/authService';
+import { signInState } from '../store/atoms';
 
 const HomeView: React.FC = () => {
+  const history = useHistory();
+  const [isUserSignedIn] = useRecoilState(signInState);
+
   const handleButtonClick = () => {
-    spotifyService.startAuth();
+    if (isUserSignedIn) {
+      history.push('/liked');
+    } else {
+      apiService.startAuth();
+    }
   };
 
   return (

@@ -1,5 +1,6 @@
 import React, { useEffect } from 'react';
 import { useRecoilState } from 'recoil';
+import styled from 'styled-components';
 
 import Layout from '../components/Layout';
 import apiService from '../services/apiService';
@@ -23,9 +24,16 @@ const LikedView: React.FC = () => {
 
   return (
     <Layout>
-      <SongsList songs={songs} />
+      <Container>
+        <SongsList songs={songs} />
+      </Container>
     </Layout>
   );
 };
+
+const Container = styled.div`
+  width: 100%;
+  padding: 2rem 0 12rem;
+`;
 
 export default LikedView;

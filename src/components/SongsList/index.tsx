@@ -13,22 +13,15 @@ const SongsList: React.FC<IProps> = ({ songs }) => (
     {songs.map(({ track }) => (
       <ListItem key={track.id}>
         <SongCard
+          id={track.id}
           imgSrc={track.album.images[1].url}
           name={track.name}
           duration={track.duration_ms}
           artists={track.artists.map(({ name }) => name)}
+          uri={track.uri}
         />
       </ListItem>
     ))}
-
-    <ListItem>
-      <SongCard
-        imgSrc="https://i.scdn.co/image/ab67616d00001e025a4d5d9f724118698c9a25ff"
-        name="test"
-        duration={5000}
-        artists={['M.I.M.E', 'test']}
-      />
-    </ListItem>
   </List>
 );
 

@@ -46,6 +46,14 @@ class PlayerService {
       });
     }
   }
+
+  toggle() {
+    this.player?.togglePlay();
+  }
+
+  addPlayerStateListener(cb: (state: Spotify.PlaybackState) => void) {
+    this.player?.on('player_state_changed', async (state) => cb(state));
+  }
 }
 
 const playerService = new PlayerService();

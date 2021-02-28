@@ -1,19 +1,33 @@
-import React, { useMemo, useState } from 'react';
+import React, { useMemo } from 'react';
+import { useRecoilState } from 'recoil';
 import styled from 'styled-components';
 
 import Button from '../Button';
+import playerService from '../../services/playerService';
+import { playbackState } from '../../store/atoms';
 
 interface IProps {
+  id: string;
   name: string;
   duration: number;
   imgSrc: string;
   artists: string[];
+  uri: string;
 }
 
-const SongCard: React.FC<IProps> = ({ name, duration, imgSrc, artists }) => {
-  const [isPlaying, setIsPLaying] = useState<boolean>(false);
+const SongCard: React.FC<IProps> = ({
+  id,
+  name,
+  duration,
+  imgSrc,
+  artists,
+  uri,
+}) => {
+  const [playerState] = useRecoilState(playbackState);
 
-  const handleButtonClick = () => setIsPLaying((prev) => !prev);
+  const handleButtonClick = () => {
+    playerService.play(uri);
+  };
 
   const formattedDuration = useMemo(() => {
     const date = new Date(duration);
@@ -21,6 +35,8 @@ const SongCard: React.FC<IProps> = ({ name, duration, imgSrc, artists }) => {
 
     return stringData.slice(14, -5);
   }, [duration]);
+
+  const isDisabled = playerState?.track_window.current_track.id === id;
 
   return (
     <Main>
@@ -31,8 +47,8 @@ const SongCard: React.FC<IProps> = ({ name, duration, imgSrc, artists }) => {
         <Duration>Duration: {formattedDuration}</Duration>
       </SongInfoContainer>
       <ButtonContainer>
-        <Button onClick={handleButtonClick}>
-          {isPlaying ? 'Pause' : 'Play'}
+        <Button onClick={handleButtonClick} disabled={isDisabled}>
+          {isDisabled ? 'Playing now' : 'Play'}
         </Button>
       </ButtonContainer>
     </Main>
@@ -56,10 +72,14 @@ const SongInfoContainer = styled.div`
   flex-direction: column;
   flex: 1;
   padding-left: 1rem;
+  min-width: 0;
 `;
 
 const Title = styled.h2`
   margin-bottom: 0;
+  text-overflow: ellipsis;
+  overflow: hidden;
+  white-space: nowrap;
 `;
 
 const Duration = styled.span`

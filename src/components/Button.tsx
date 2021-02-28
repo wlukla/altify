@@ -23,6 +23,14 @@ const Button = styled.button`
     outline: none;
     box-shadow: 0px 0px 0px 2px red;
   }
+
+  :disabled {
+    background-color: ${({ theme }) => theme.palette.primary.text};
+    color: ${({ theme }) => theme.palette.primary.main};
+    border: 2px solid ${({ theme }) => theme.palette.secondary.text};
+
+    opacity: 0.6;
+  }
 `;
 
 export default Button;
