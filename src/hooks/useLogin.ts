@@ -2,6 +2,7 @@ import { useEffect } from 'react';
 import { useRecoilState, SetterOrUpdater } from 'recoil';
 
 import authService from '../services/authService';
+import playerService from '../services/playerService';
 import { signInState } from '../store/atoms';
 
 const useLoginState = (): [boolean, SetterOrUpdater<boolean>] => {
@@ -10,8 +11,9 @@ const useLoginState = (): [boolean, SetterOrUpdater<boolean>] => {
   useEffect(() => {
     const loginHandler = async () => {
       const accessToken = await authService.getToken();
-
-      console.log(accessToken);
+      if (accessToken) {
+        await playerService.createPlayer(accessToken);
+      }
 
       setIsLoggedIn(Boolean(accessToken));
     };
