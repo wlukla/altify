@@ -1,8 +1,10 @@
+import { LikedSongsResponse, Item } from './types';
+
 class ApiService {
-  async fetchWithAuthorization(
+  async fetchWithAuthorization<T>(
     url: string,
     init?: RequestInit
-  ): Promise<Record<string, unknown> | void> {
+  ): Promise<T | void> {
     const localStorageTokenData = localStorage.getItem('tokenData');
 
     if (localStorageTokenData) {
@@ -21,21 +23,15 @@ class ApiService {
     }
   }
 
-  async getLikedSongs(
-    offset = 0,
-    limit = 50
-  ): Promise<Record<string, unknown> | void> {
+  async getLikedSongs(offset = 0, limit = 50): Promise<Item[] | void> {
     const url = `https://api.spotify.com/v1/me/tracks?offset=${offset}&limit=${limit}`;
-    const data = await this.fetchWithAuthorization(url);
+    const data = await this.fetchWithAuthorization<LikedSongsResponse>(url);
 
-    return data;
-  }
+    if (data) {
+      return data.items;
+    }
 
-  async getUserAlbums(): Promise<Record<string, unknown> | void> {
-    const url = 'https://api.spotify.com/v1/me/tracks?offset=0&limit=20';
-    const data = await this.fetchWithAuthorization(url);
-
-    return data;
+    return;
   }
 }
 
