@@ -18,19 +18,20 @@ const AppContainer = styled.div`
   min-height: 100vh;
   display: flex;
   flex-direction: column;
+  align-items: center;
 `;
 
 const Header = styled.header`
   padding: 0 3rem;
   width: 100%;
-  height: 6rem;
+  height: 4rem;
   background-color: ${({ theme }) => theme.palette.secondary.main};
   display: flex;
   align-items: center;
 `;
 
 const Main = styled.main`
-  width: 100%;
+  width: 60%;
   flex: 1;
   display: flex;
   flex-direction: column;

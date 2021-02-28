@@ -3,6 +3,8 @@ import React, { useEffect, useState } from 'react';
 import Layout from '../components/Layout';
 import apiService from '../services/apiService';
 
+import SongsList from '../components/SongsList';
+
 const FavouritesView: React.FC = () => {
   const [data, setData] = useState<Record<string, unknown> | void>();
 
@@ -18,7 +20,7 @@ const FavouritesView: React.FC = () => {
 
   return (
     <Layout>
-      <p>{JSON.stringify(data, null, 4)}</p>
+      <SongsList songs={[]} />
     </Layout>
   );
 };

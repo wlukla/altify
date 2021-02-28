@@ -7,6 +7,10 @@ const GlobalStyle = createGlobalStyle`
     background: ${({ theme }) => theme.palette.primary.main};
     font-family: ${({ theme }) => theme.font};
   }
+
+  * {
+    box-sizing: border-box;
+  }
 `;
 
 export default GlobalStyle;

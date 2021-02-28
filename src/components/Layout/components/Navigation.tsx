@@ -21,7 +21,7 @@ const Navigation: React.FC = () => (
   </Nav>
 );
 
-const Nav = styled.div`
+const Nav = styled.nav`
   height: 100%;
 `;
 
