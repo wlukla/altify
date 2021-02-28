@@ -2,10 +2,6 @@ import { createRandomString, sha256, toBase64 } from '../utils';
 
 class SpotifyService {
   clientId: string;
-  accessToken?: string;
-  expiresIn?: string;
-  refreshToken?: string;
-  tokenType?: string;
 
   constructor(clientId?: string) {
     if (!clientId) {
@@ -42,6 +38,7 @@ class SpotifyService {
       redirect_uri: `${window.location.origin}/login`,
       code_challenge_method: 'S256',
       code_challenge,
+      scope: 'user-library-read',
     });
 
     sessionStorage.setItem('code_verifier', codeVerifier);
@@ -74,13 +71,46 @@ class SpotifyService {
 
       const data = await response.json();
 
-      const { access_token, expires_in, refresh_token, token_type } = data;
-
-      this.accessToken = access_token;
-      this.expiresIn = expires_in;
-      this.refreshToken = refresh_token;
-      this.tokenType = token_type;
+      localStorage.setItem(
+        'tokenData',
+        JSON.stringify({
+          ...data,
+          expiresAt: parseInt(data.expires_in) * 1000 + Date.now(),
+        })
+      );
     }
+  }
+
+  async fetchWithAuthorization(
+    url: string,
+    init?: RequestInit
+  ): Promise<Record<string, unknown> | void> {
+    const localStorageTokenData = localStorage.getItem('tokenData');
+
+    if (localStorageTokenData) {
+      const tokenData = JSON.parse(localStorageTokenData);
+
+      const response = await fetch(url, {
+        ...init,
+        headers: {
+          Authorization: `${tokenData.token_type} ${tokenData.access_token}`,
+        },
+      });
+
+      const data = await response.json();
+
+      return data;
+    }
+  }
+
+  async getLikedSongs(): Promise<Record<string, unknown> | void> {
+    const url = 'https://api.spotify.com/v1/me/tracks?offset=0&limit=20';
+
+    const data = await this.fetchWithAuthorization(url);
+
+    console.log(data);
+
+    return data;
   }
 }
 
