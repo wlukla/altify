@@ -1,0 +1,40 @@
+import React from 'react';
+import styled from 'styled-components';
+
+import Navigation from './components/Navigation';
+
+const Layout: React.FC = ({ children }) => (
+  <AppContainer>
+    <Header>
+      <Navigation />
+    </Header>
+    <Main>{children}</Main>
+  </AppContainer>
+);
+
+const AppContainer = styled.div`
+  width: 100%;
+  height: 100%;
+  min-height: 100vh;
+  display: flex;
+  flex-direction: column;
+`;
+
+const Header = styled.header`
+  width: 100%;
+  height: 6rem;
+  background-color: ${({ theme }) => theme.palette.secondary.main};
+  display: flex;
+  align-items: center;
+`;
+
+const Main = styled.main`
+  width: 100%;
+  flex: 1;
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  justify-content: center;
+`;
+
+export default Layout;

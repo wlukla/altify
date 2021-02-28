@@ -112,6 +112,16 @@ class SpotifyService {
 
     return data;
   }
+
+  async getUserAlbums(): Promise<Record<string, unknown> | void> {
+    const url = 'https://api.spotify.com/v1/me/tracks?offset=0&limit=20';
+
+    const data = await this.fetchWithAuthorization(url);
+
+    console.log(data);
+
+    return data;
+  }
 }
 
 const service = new SpotifyService(process.env.CLIENT_ID);
