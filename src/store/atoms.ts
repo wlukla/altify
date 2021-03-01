@@ -1,12 +1,11 @@
 import { atom } from 'recoil';
-import { Item, Track } from '../services/types';
 
 export const signInState = atom({
   key: 'signInState',
   default: false,
 });
 
-export const songsListState = atom<Item[]>({
+export const songsListState = atom<SpotifyApi.SavedTrackObject[]>({
   key: 'songsListState',
   default: [],
 });
@@ -16,7 +15,7 @@ export const playbackState = atom<Spotify.PlaybackState | null>({
   default: null,
 });
 
-export const randomSongState = atom<Track | null>({
+export const randomSongState = atom<SpotifyApi.TrackObjectFull | null>({
   key: 'randomSongState',
   default: null,
 });

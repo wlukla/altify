@@ -1,11 +1,10 @@
 import React from 'react';
 import styled from 'styled-components';
 
-import { Item } from '../../services/types';
 import SongCard from '../SongCard';
 
 interface IProps {
-  songs: Item[];
+  songs: SpotifyApi.SavedTrackObject[];
 }
 
 const SongsList: React.FC<IProps> = ({ songs }) => (

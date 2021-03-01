@@ -25,7 +25,7 @@ class AuthService {
     };
   }
 
-  async startAuth(): Promise<void> {
+  async startAuth() {
     const {
       codeVerifier,
       codeChallenge: code_challenge,
@@ -48,7 +48,7 @@ class AuthService {
     window.open(url, '_self');
   }
 
-  async fetchToken(): Promise<void> {
+  async fetchToken() {
     const queryParams = new URLSearchParams(location.search);
 
     const params = new URLSearchParams({
@@ -81,7 +81,7 @@ class AuthService {
     }
   }
 
-  async refreshToken(refreshToken: string): Promise<string> {
+  async refreshToken(refreshToken: string) {
     const params = new URLSearchParams({
       client_id: this.clientId,
       grant_type: 'refresh_token',
@@ -105,7 +105,7 @@ class AuthService {
     return data.access_token;
   }
 
-  async getToken(): Promise<string | void> {
+  async getToken() {
     const localStorageTokenData = localStorage.getItem('tokenData');
 
     if (!localStorageTokenData) return;
