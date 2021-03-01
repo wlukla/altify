@@ -1,4 +1,5 @@
 import React from 'react';
+import { useHistory } from 'react-router';
 import { useRecoilState } from 'recoil';
 import styled from 'styled-components';
 import useLogin from '../../hooks/useLogin';
@@ -12,11 +13,14 @@ import Navigation from './components/Navigation';
 
 const Layout: React.FC = ({ children }) => {
   useLogin();
+
+  const history = useHistory();
   const [isUserLoggedIn, setIsUserLoggedIn] = useRecoilState(signInState);
 
   const handleLogOutClick = () => {
     authService.logOut();
     setIsUserLoggedIn(false);
+    history.push('/');
   };
 
   return (

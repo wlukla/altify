@@ -1,22 +1,33 @@
 import React from 'react';
 import styled from 'styled-components';
 import { Link as RouterLink } from 'react-router-dom';
+import { useRecoilState } from 'recoil';
 
-const Navigation: React.FC = () => (
-  <Nav>
-    <List>
-      <ListItem>
-        <Link to="/">Home</Link>
-      </ListItem>
-      <ListItem>
-        <Link to="/liked">Liked</Link>
-      </ListItem>
-      <ListItem>
-        <Link to="/explore">Explore</Link>
-      </ListItem>
-    </List>
-  </Nav>
-);
+import { signInState } from '../../../store/atoms';
+
+const Navigation: React.FC = () => {
+  const [isUserLoggedId] = useRecoilState(signInState);
+
+  return (
+    <Nav>
+      <List>
+        <ListItem>
+          <Link to="/">Home</Link>
+        </ListItem>
+        {isUserLoggedId && (
+          <>
+            <ListItem>
+              <Link to="/liked">Liked</Link>
+            </ListItem>
+            <ListItem>
+              <Link to="/explore">Explore</Link>
+            </ListItem>
+          </>
+        )}
+      </List>
+    </Nav>
+  );
+};
 
 const Nav = styled.nav`
   height: 100%;

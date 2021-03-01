@@ -15,7 +15,7 @@ const LoginView: React.FC = () => {
         await authService.fetchToken();
       }
 
-      history.push('/liked');
+      history.replace('/liked');
     };
 
     requestHandler();
