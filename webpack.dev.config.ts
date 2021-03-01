@@ -10,7 +10,7 @@ const config: webpack.Configuration = {
   output: {
     publicPath: '/',
   },
-  entry: './src/App.tsx',
+  entry: './src/index.tsx',
   module: {
     rules: [
       {

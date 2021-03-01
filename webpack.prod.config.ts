@@ -8,7 +8,7 @@ import Dotenv from 'dotenv-webpack';
 
 const config: webpack.Configuration = {
   mode: 'production',
-  entry: './src/App.tsx',
+  entry: './src/index.tsx',
   output: {
     path: path.resolve(__dirname, 'build'),
     filename: '[name].[contenthash].js',

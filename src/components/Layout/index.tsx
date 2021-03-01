@@ -1,15 +1,18 @@
 import React from 'react';
+import { useRecoilState } from 'recoil';
 import styled from 'styled-components';
-
-import Button from '../Button';
-import authService from '../../services/authService';
 import useLogin from '../../hooks/useLogin';
 
-import Navigation from './components/Navigation';
+import authService from '../../services/authService';
+import { signInState } from '../../store/atoms';
+import Button from '../Button';
 import Player from '../Player';
 
+import Navigation from './components/Navigation';
+
 const Layout: React.FC = ({ children }) => {
-  const [isUserLoggedIn, setIsUserLoggedIn] = useLogin();
+  useLogin();
+  const [isUserLoggedIn, setIsUserLoggedIn] = useRecoilState(signInState);
 
   const handleLogOutClick = () => {
     authService.logOut();
