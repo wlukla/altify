@@ -1,5 +1,6 @@
 class PlayerService {
   player?: Spotify.SpotifyPlayer;
+  stateRefreshInterval?: NodeJS.Timeout;
 
   constructor() {
     this.waitForSpotify();
@@ -53,6 +54,19 @@ class PlayerService {
 
   addPlayerStateListener(cb: (state: Spotify.PlaybackState) => void) {
     this.player?.on('player_state_changed', async (state) => cb(state));
+  }
+
+  startStateRefresh(callback: (state: Spotify.PlaybackState) => void) {
+    if (this.stateRefreshInterval) {
+      clearInterval(this.stateRefreshInterval);
+    }
+
+    this.stateRefreshInterval = setInterval(async () => {
+      const state = await this.player?.getCurrentState();
+      if (state) {
+        callback(state);
+      }
+    }, 1000);
   }
 }
 

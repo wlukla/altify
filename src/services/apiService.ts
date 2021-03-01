@@ -1,4 +1,5 @@
-import { LikedSongsResponse, Item } from './types';
+import getRandomChar from '../utils/getRandomChar';
+import { SongsResponse, Item, RandomSongResponse, Track } from './types';
 
 class ApiService {
   async fetchWithAuthorization<T>(
@@ -25,13 +26,28 @@ class ApiService {
 
   async getLikedSongs(offset = 0, limit = 50): Promise<Item[] | void> {
     const url = `https://api.spotify.com/v1/me/tracks?offset=${offset}&limit=${limit}`;
-    const data = await this.fetchWithAuthorization<LikedSongsResponse>(url);
+    const data = await this.fetchWithAuthorization<SongsResponse>(url);
 
     if (data) {
       return data.items;
     }
+  }
 
-    return;
+  async getRandomTrack(): Promise<Track | void> {
+    const params = new URLSearchParams({
+      offset: Math.floor(Math.random() * 1000).toString(),
+      q: `${getRandomChar()}%`,
+      type: 'track',
+      limit: '1',
+    });
+
+    const url = `https://api.spotify.com/v1/search?${params}`;
+
+    const data = await this.fetchWithAuthorization<RandomSongResponse>(url);
+
+    if (data) {
+      return data.tracks.items[0];
+    }
   }
 }
 

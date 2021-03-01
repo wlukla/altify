@@ -11,6 +11,9 @@ const Navigation: React.FC = () => (
       <ListItem>
         <Link to="/liked">Liked</Link>
       </ListItem>
+      <ListItem>
+        <Link to="/explore">Explore</Link>
+      </ListItem>
     </List>
   </Nav>
 );

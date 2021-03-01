@@ -62,10 +62,20 @@ export interface Item {
   track: Track;
 }
 
-export interface LikedSongsResponse {
+export interface SongsResponse {
   href: string;
   items: Item[];
   limit: number;
   offset: number;
   total: number;
+}
+
+export interface RandomSongResponse {
+  tracks: {
+    href: string;
+    items: Track[];
+    limit: number;
+    offset: number;
+    total: number;
+  };
 }
