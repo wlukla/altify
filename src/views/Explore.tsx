@@ -39,6 +39,7 @@ const ExploreView: React.FC = () => {
           duration={randomSong.duration_ms}
           artists={randomSong.artists.map(({ name }) => name)}
           uri={randomSong.uri}
+          withLike
         />
       )}
     </Layout>

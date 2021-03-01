@@ -4,7 +4,8 @@ import styled from 'styled-components';
 
 import Button from '../Button';
 import playerService from '../../services/playerService';
-import { playbackState } from '../../store/atoms';
+import apiService from '../../services/apiService';
+import { playbackState, songsListState } from '../../store/atoms';
 
 interface IProps {
   id: string;
@@ -13,6 +14,7 @@ interface IProps {
   imgSrc: string;
   artists: string[];
   uri: string;
+  withLike?: boolean;
 }
 
 const SongCard: React.FC<IProps> = ({
@@ -22,11 +24,22 @@ const SongCard: React.FC<IProps> = ({
   imgSrc,
   artists,
   uri,
+  withLike,
 }) => {
   const [playerState] = useRecoilState(playbackState);
+  const [songsList, setSongsList] = useRecoilState(songsListState);
 
-  const handleButtonClick = () => {
+  const handlePlayButtonClick = () => {
     playerService.play(uri);
+  };
+
+  const handleLikeButtonClick = async () => {
+    await apiService.likeSong(id);
+    const newSongs = await apiService.getLikedSongs();
+
+    if (newSongs) {
+      setSongsList(newSongs);
+    }
   };
 
   const formattedDuration = useMemo(() => {
@@ -38,6 +51,11 @@ const SongCard: React.FC<IProps> = ({
 
   const isDisabled = playerState?.track_window.current_track.id === id;
 
+  const isLiked = useMemo(
+    () => Boolean(songsList.find((song) => song.track.id === id)),
+    [id, songsList]
+  );
+
   return (
     <Main>
       <Image src={imgSrc} />
@@ -46,11 +64,17 @@ const SongCard: React.FC<IProps> = ({
         <Artists>{artists.join(', ')}</Artists>
         <Duration>Duration: {formattedDuration}</Duration>
       </SongInfoContainer>
-      <ButtonContainer>
-        <Button onClick={handleButtonClick} disabled={isDisabled}>
+      <ButtonsContainer justify={withLike ? 'space-between' : 'flex-end'}>
+        {withLike && (
+          <Button disabled={isLiked} onClick={handleLikeButtonClick}>
+            Like
+          </Button>
+        )}
+
+        <Button onClick={handlePlayButtonClick} disabled={isDisabled}>
           {isDisabled ? 'Playing now' : 'Play'}
         </Button>
-      </ButtonContainer>
+      </ButtonsContainer>
     </Main>
   );
 };
@@ -92,10 +116,10 @@ const Artists = styled.span`
   opacity: 0.7;
 `;
 
-const ButtonContainer = styled.div`
+const ButtonsContainer = styled.div<{ justify: string }>`
   display: flex;
   flex-direction: column;
-  justify-content: flex-end;
+  justify-content: ${({ justify }) => justify};
 `;
 
 export default SongCard;

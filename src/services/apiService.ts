@@ -18,9 +18,13 @@ class ApiService {
         },
       });
 
-      const data = await response.json();
+      try {
+        const data = await response.json();
 
-      return data;
+        return data;
+      } catch (e) {
+        console.log("Response doesn't have body");
+      }
     }
   }
 
@@ -48,6 +52,13 @@ class ApiService {
     if (data) {
       return data.tracks.items[0];
     }
+  }
+
+  likeSong(id: string) {
+    const params = new URLSearchParams({ ids: id });
+    const url = `https://api.spotify.com/v1/me/tracks?${params}`;
+
+    return this.fetchWithAuthorization(url, { method: 'PUT' });
   }
 }
 

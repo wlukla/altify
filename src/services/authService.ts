@@ -37,7 +37,8 @@ class AuthService {
       redirect_uri: `${window.location.origin}/login`,
       code_challenge_method: 'S256',
       code_challenge,
-      scope: 'user-library-read streaming user-read-email user-read-private',
+      scope:
+        'user-library-read streaming user-read-email user-read-private user-library-modify',
     });
 
     sessionStorage.setItem('code_verifier', codeVerifier);
