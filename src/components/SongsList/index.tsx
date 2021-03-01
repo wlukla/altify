@@ -33,7 +33,7 @@ const List = styled.ul`
 
 const ListItem = styled.li`
   :not(:last-child) {
-    margin-bottom: 1rem;
+    margin-bottom: 14px;
   }
 `;
 

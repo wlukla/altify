@@ -30,6 +30,14 @@ const config: webpack.Configuration = {
           },
         },
       },
+      {
+        test: /\.svg$/,
+        use: [
+          {
+            loader: 'react-svg-loader',
+          },
+        ],
+      },
     ],
   },
   resolve: {

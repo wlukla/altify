@@ -5,6 +5,8 @@ import styled from 'styled-components';
 import Button from './Button';
 import playerService from '../services/playerService';
 import { playbackState } from '../store/atoms';
+import PlayIcon from '../assets/icons/play-icon.svg';
+import PauseIcon from '../assets/icons/pause-icon.svg';
 
 const Player: React.FC = () => {
   const [playerState, setPlayerState] = useRecoilState(playbackState);
@@ -22,7 +24,11 @@ const Player: React.FC = () => {
   return (
     <Main>
       <RoundButton onClick={togglePlayback}>
-        {playerState?.paused ? <PlayIcon /> : <PauseIcon />}
+        {playerState?.paused ? (
+          <PlayIcon width={20} height={20} />
+        ) : (
+          <PauseIcon width={20} height={20} />
+        )}
       </RoundButton>
       {playerState && (
         <>
@@ -50,33 +56,21 @@ const Main = styled.div`
   position: fixed;
   bottom: 0;
   left: 0;
-  padding: 1rem 2rem;
+  padding: 10px 20px;
   width: 100%;
-  height: 6rem;
+  height: 80px;
   display: flex;
   justify-content: space-between;
   align-items: center;
 
+  z-index: 9999;
+
   background-color: ${({ theme }) => theme.palette.secondary.main};
-`;
 
-const PlayIcon = styled.div`
-  margin-right: -3px;
-  width: 20px;
-  height: 20px;
-  border-style: solid;
-  border-width: 10px 0px 10px 20px;
-  border-color: transparent transparent transparent
-    ${({ theme }) => theme.palette.secondary.text};
-`;
-
-const PauseIcon = styled.div`
-  margin-right: -2px;
-  width: 20px;
-  height: 20px;
-  border-style: double;
-  border-width: 0px 0px 0px 10px;
-  border-color: ${({ theme }) => theme.palette.secondary.text};
+  @media (min-width: ${({ theme }) => theme.breakpoints.md}) {
+    padding: 16px 26px;
+    height: 100px;
+  }
 `;
 
 const RoundButton = styled(Button)`
@@ -84,13 +78,13 @@ const RoundButton = styled(Button)`
   align-items: center;
   justify-content: center;
 
-  height: 3rem;
-  width: 3rem;
+  height: 50px;
+  width: 50px;
 `;
 
 const Image = styled.img`
   height: 100%;
-  margin: 0 0.5rem;
+  margin: 0 12px;
 `;
 
 const PlaybackProgress = styled.div`

@@ -33,7 +33,15 @@ const LikedView: React.FC = () => {
 
 const Container = styled.div`
   width: 100%;
-  padding: 2rem 0 12rem;
+  padding: 14px 0 94px;
+
+  @media (min-width: ${({ theme }) => theme.breakpoints.md}) {
+    padding: 20px 0 120px;
+  }
+
+  @media (min-width: ${({ theme }) => theme.breakpoints.md}) {
+    padding: 24px 0 144px;
+  }
 `;
 
 export default LikedView;

@@ -46,22 +46,45 @@ const AppContainer = styled.div`
 `;
 
 const Header = styled.header`
-  padding: 0 3rem;
+  position: sticky;
+  top: 0;
+  left: 0;
+  padding: 0 16px;
   width: 100%;
-  height: 4rem;
+  height: 50px;
   background-color: ${({ theme }) => theme.palette.secondary.main};
   display: flex;
   align-items: center;
   justify-content: space-between;
+
+  z-index: 9999;
+
+  @media (min-width: ${({ theme }) => theme.breakpoints.md}) {
+    padding: 0 32px;
+    height: 70px;
+  }
 `;
 
 const Main = styled.main`
-  width: 60%;
+  width: 100%;
+  padding: 0 8px;
   flex: 1;
   display: flex;
   flex-direction: column;
   align-items: center;
   justify-content: center;
+
+  @media (min-width: ${({ theme }) => theme.breakpoints.sm}) {
+    width: 80%;
+  }
+
+  @media (min-width: ${({ theme }) => theme.breakpoints.md}) {
+    width: 70%;
+  }
+
+  @media (min-width: ${({ theme }) => theme.breakpoints.lg}) {
+    width: 60%;
+  }
 `;
 
 export default Layout;

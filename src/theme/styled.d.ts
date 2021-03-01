@@ -19,6 +19,11 @@ declare module 'styled-components' {
       primary: IPalette;
       secondary: IPalette;
     };
-    font: styring;
+    font: string;
+    breakpoints: {
+      sm: string;
+      md: string;
+      lg: string;
+    };
   }
 }

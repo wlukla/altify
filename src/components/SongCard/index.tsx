@@ -62,7 +62,7 @@ const SongCard: React.FC<IProps> = ({
       <SongInfoContainer>
         <Title>{name}</Title>
         <Artists>{artists.join(', ')}</Artists>
-        <Duration>Duration: {formattedDuration}</Duration>
+        <Duration>{formattedDuration}</Duration>
       </SongInfoContainer>
       <ButtonsContainer justify={withLike ? 'space-between' : 'flex-end'}>
         {withLike && (
@@ -80,13 +80,21 @@ const SongCard: React.FC<IProps> = ({
 };
 
 const Main = styled.article`
-  padding: 0.5rem;
+  padding: 6px;
   width: 100%;
-  height: 10rem;
+  height: 80px;
   display: flex;
   border-radius: ${({ theme }) => theme.borderRadius.default};
 
   box-shadow: 4px 7px 15px 0px rgba(0, 0, 0, 0.2);
+
+  @media (min-width: ${({ theme }) => theme.breakpoints.sm}) {
+    height: 120px;
+  }
+
+  @media (min-width: ${({ theme }) => theme.breakpoints.lg}) {
+    height: 150px;
+  }
 `;
 
 const Image = styled.img``;
@@ -100,20 +108,47 @@ const SongInfoContainer = styled.div`
 `;
 
 const Title = styled.h2`
-  margin-bottom: 0;
+  margin: 0;
   text-overflow: ellipsis;
   overflow: hidden;
   white-space: nowrap;
+
+  font-size: 16px;
+
+  @media (min-width: ${({ theme }) => theme.breakpoints.sm}) {
+    font-size: 20px;
+  }
+
+  @media (min-width: ${({ theme }) => theme.breakpoints.lg}) {
+    font-size: 24px;
+  }
 `;
 
 const Duration = styled.span`
   margin-top: auto;
+  font-size: 12px;
+
+  @media (min-width: ${({ theme }) => theme.breakpoints.sm}) {
+    font-size: 14px;
+  }
+
+  @media (min-width: ${({ theme }) => theme.breakpoints.lg}) {
+    font-size: 16px;
+  }
 `;
 
 const Artists = styled.span`
-  font-size: 12px;
+  font-size: 10px;
   color: ${({ theme }) => theme.palette.secondary.text};
   opacity: 0.7;
+
+  @media (min-width: ${({ theme }) => theme.breakpoints.sm}) {
+    font-size: 12px;
+  }
+
+  @media (min-width: ${({ theme }) => theme.breakpoints.lg}) {
+    font-size: 14px;
+  }
 `;
 
 const ButtonsContainer = styled.div<{ justify: string }>`

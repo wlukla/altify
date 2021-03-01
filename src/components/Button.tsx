@@ -1,13 +1,17 @@
 import styled from 'styled-components';
 
 const Button = styled.button`
-  width: 11rem;
-  padding: 0.5rem 1rem;
+  padding: 4px 8px;
+  font-size: 14px;
   background-color: ${({ theme }) => theme.palette.primary.main};
   color: ${({ theme }) => theme.palette.primary.text};
   border-radius: ${({ theme }) => theme.borderRadius.full};
   border: 2px solid ${({ theme }) => theme.palette.primary.text};
   font-weight: 600;
+
+  display: flex;
+  align-items: center;
+  justify-content: center;
 
   cursor: pointer;
 
@@ -30,6 +34,16 @@ const Button = styled.button`
     border: 2px solid ${({ theme }) => theme.palette.secondary.text};
 
     opacity: 0.6;
+  }
+
+  @media (min-width: ${({ theme }) => theme.breakpoints.sm}) {
+    padding: 6px 10px;
+    font-size: 15px;
+  }
+
+  @media (min-width: ${({ theme }) => theme.breakpoints.md}) {
+    padding: 8px 12px;
+    font-size: 17px;
   }
 `;
 

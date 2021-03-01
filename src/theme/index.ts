@@ -20,6 +20,11 @@ const theme: DefaultTheme = {
     },
   },
   font: 'Roboto, Helvetiva, sans-serif',
+  breakpoints: {
+    sm: '576px',
+    md: '768px',
+    lg: '992px',
+  },
 };
 
 export default theme;

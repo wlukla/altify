@@ -47,7 +47,19 @@ const ListItem = styled.li`
   align-items: center;
 
   :not(:last-child) {
-    margin-right: 1rem;
+    margin-right: 4px;
+
+    @media (min-width: ${({ theme }) => theme.breakpoints.sm}) {
+      margin-right: 12px;
+    }
+
+    @media (min-width: ${({ theme }) => theme.breakpoints.md}) {
+      margin-right: 20px;
+    }
+
+    @media (min-width: ${({ theme }) => theme.breakpoints.lg}) {
+      margin-right: 26px;
+    }
   }
 `;
 
@@ -55,9 +67,8 @@ const Link = styled(RouterLink)`
   display: flex;
   align-items: center;
   justify-content: center;
-  min-width: 4rem;
-  padding: 0.5rem;
-  font-size: 16px;
+  padding: 4px;
+  font-size: 14px;
   font-weight: 600;
   text-decoration: none;
   color: ${({ theme }) => theme.palette.secondary.text};
@@ -69,6 +80,20 @@ const Link = styled(RouterLink)`
 
   :hover {
     border: 2px solid ${({ theme }) => theme.palette.secondary.text};
+  }
+
+  @media (min-width: ${({ theme }) => theme.breakpoints.sm}) {
+    padding: 6px;
+    font-size: 15px;
+  }
+
+  @media (min-width: ${({ theme }) => theme.breakpoints.md}) {
+    padding: 8px;
+    font-size: 17px;
+  }
+
+  @media (min-width: ${({ theme }) => theme.breakpoints.lg}) {
+    font-size: 21px;
   }
 `;
 

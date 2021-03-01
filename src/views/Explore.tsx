@@ -5,6 +5,8 @@ import Button from '../components/Button';
 
 import Layout from '../components/Layout';
 import SongCard from '../components/SongCard';
+import Heading from '../components/Heading';
+import Subheading from '../components/Subheading';
 import { randomSongState } from '../store/atoms';
 import apiService from '../services/apiService';
 
@@ -27,9 +29,9 @@ const ExploreView: React.FC = () => {
       <InfoContainer>
         <Heading>Random songs</Heading>
         <Subheading>Want to explore Spotify tracks world?</Subheading>
-        <Button onClick={handleRandomSongClick} disabled={isPending}>
+        <ButtonLarge onClick={handleRandomSongClick} disabled={isPending}>
           Get random song!
-        </Button>
+        </ButtonLarge>
       </InfoContainer>
       {randomSong && (
         <SongCard
@@ -46,25 +48,18 @@ const ExploreView: React.FC = () => {
   );
 };
 const InfoContainer = styled.div`
-  margin-bottom: 1rem;
+  margin-bottom: 16px;
   width: 100%;
   display: flex;
   flex-direction: column;
   align-items: center;
 `;
 
-const Heading = styled.h1`
-  margin-bottom: 1rem;
-  font-weight: 700;
-  font-size: 32px;
-  color: ${({ theme }) => theme.palette.secondary.text};
-`;
-
-const Subheading = styled.span`
-  margin-bottom: 2rem;
-  font-weight: 700;
-  font-size: 24px;
-  color: ${({ theme }) => theme.palette.secondary.text};
+const ButtonLarge = styled(Button)`
+  && {
+    font-size: 24px;
+    padding: 10px 24px;
+  }
 `;
 
 export default ExploreView;
