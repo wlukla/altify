@@ -8,6 +8,7 @@ import Heading from '../components/Heading';
 import Subheading from '../components/Subheading';
 import { randomSongState } from '../store/atoms';
 import apiService from '../services/apiService';
+import LoadingIndicator from '../components/LoadingIndicator';
 
 const ExploreView: React.FC = () => {
   const [isPending, setIsPending] = useState<boolean>(false);
@@ -32,7 +33,7 @@ const ExploreView: React.FC = () => {
           Get random song!
         </ButtonLarge>
       </InfoContainer>
-      {randomSong && (
+      {randomSong && !isPending && (
         <SongCard
           id={randomSong.id}
           imgSrc={randomSong.album.images[1].url}
@@ -43,6 +44,7 @@ const ExploreView: React.FC = () => {
           withLike
         />
       )}
+      {isPending && <LoadingIndicator />}
     </>
   );
 };
