@@ -15,7 +15,7 @@ const HomeView: React.FC = () => {
 
   const handleButtonClick = () => {
     if (isUserLoggedIn) {
-      history.push('/liked');
+      history.push('/liked/1');
     } else {
       apiService.startAuth();
     }

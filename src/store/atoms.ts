@@ -5,9 +5,9 @@ export const authorizationState = atom({
   default: false,
 });
 
-export const songsListState = atom<SpotifyApi.SavedTrackObject[]>({
+export const songsListState = atom<SpotifyApi.UsersSavedTracksResponse | null>({
   key: 'songsListState',
-  default: [],
+  default: null,
 });
 
 export const playbackState = atom<Spotify.PlaybackState | null>({

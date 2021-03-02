@@ -17,7 +17,7 @@ const Router: React.FC = () => (
         <Route path="/login" exact>
           <LoginView />
         </Route>
-        <Route path="/liked" exact>
+        <Route path="/liked/:slug" exact>
           <LikedView />
         </Route>
         <Route path="/explore" exact>

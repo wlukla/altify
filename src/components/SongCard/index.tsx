@@ -52,7 +52,7 @@ const SongCard: React.FC<IProps> = ({
   const isDisabled = playerState?.track_window.current_track.id === id;
 
   const isLiked = useMemo(
-    () => Boolean(songsList.find((song) => song.track.id === id)),
+    () => Boolean(songsList?.items.find((song) => song.track.id === id)),
     [id, songsList]
   );
 

@@ -34,7 +34,7 @@ class ApiService {
     );
 
     if (data) {
-      return data.items;
+      return data;
     }
   }
 

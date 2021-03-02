@@ -18,7 +18,7 @@ const LoginView: React.FC = () => {
         setIsUserLoggedIn(true);
       }
 
-      history.replace('/liked');
+      history.replace('/liked/1');
     };
 
     requestHandler();

@@ -17,7 +17,7 @@ const Navigation: React.FC = () => {
         {isUserLoggedId && (
           <>
             <ListItem>
-              <Link to="/liked">Liked</Link>
+              <Link to="/liked/1">Liked</Link>
             </ListItem>
             <ListItem>
               <Link to="/explore">Explore</Link>
