@@ -3,10 +3,10 @@ import styled from 'styled-components';
 import { Link as RouterLink } from 'react-router-dom';
 import { useRecoilState } from 'recoil';
 
-import { signInState } from '../../../store/atoms';
+import { authorizationState } from '../../../store/atoms';
 
 const Navigation: React.FC = () => {
-  const [isUserLoggedId] = useRecoilState(signInState);
+  const [isUserLoggedId] = useRecoilState(authorizationState);
 
   return (
     <Nav>

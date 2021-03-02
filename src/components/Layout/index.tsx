@@ -2,10 +2,10 @@ import React from 'react';
 import { useHistory } from 'react-router';
 import { useRecoilState } from 'recoil';
 import styled from 'styled-components';
-import useLogin from '../../hooks/useLogin';
+import useLogin from '../../hooks/useAuthorization';
 
 import authService from '../../services/authService';
-import { signInState } from '../../store/atoms';
+import { authorizationState } from '../../store/atoms';
 import Button from '../Button';
 import Player from '../Player';
 
@@ -15,7 +15,9 @@ const Layout: React.FC = ({ children }) => {
   useLogin();
 
   const history = useHistory();
-  const [isUserLoggedIn, setIsUserLoggedIn] = useRecoilState(signInState);
+  const [isUserLoggedIn, setIsUserLoggedIn] = useRecoilState(
+    authorizationState
+  );
 
   const handleLogOutClick = () => {
     authService.logOut();

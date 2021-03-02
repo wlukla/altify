@@ -3,19 +3,18 @@ import { useRecoilState } from 'recoil';
 import { useHistory } from 'react-router-dom';
 import styled from 'styled-components';
 
-import Layout from '../components/Layout';
 import Button from '../components/Button';
 import Heading from '../components/Heading';
 import Subheading from '../components/Subheading';
 import apiService from '../services/authService';
-import { signInState } from '../store/atoms';
+import { authorizationState } from '../store/atoms';
 
 const HomeView: React.FC = () => {
   const history = useHistory();
-  const [isUserSignedIn] = useRecoilState(signInState);
+  const [isUserLoggedIn] = useRecoilState(authorizationState);
 
   const handleButtonClick = () => {
-    if (isUserSignedIn) {
+    if (isUserLoggedIn) {
       history.push('/liked');
     } else {
       apiService.startAuth();
@@ -23,13 +22,13 @@ const HomeView: React.FC = () => {
   };
 
   return (
-    <Layout>
+    <>
       <Heading>Altify - alternative Spotify client</Heading>
       <Subheading>Would you like to try it out?</Subheading>
       <ButtonLarge type="button" onClick={handleButtonClick}>
         Jump in
       </ButtonLarge>
-    </Layout>
+    </>
   );
 };
 

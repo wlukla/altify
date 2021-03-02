@@ -31,6 +31,10 @@ class PlayerService {
     this.player.connect();
   }
 
+  destroyPlayer() {
+    this.player?.disconnect();
+  }
+
   play(uri: string) {
     if (this.player) {
       const { id, getOAuthToken } = this.player._options;
@@ -67,6 +71,12 @@ class PlayerService {
         callback(state);
       }
     }, 1000);
+  }
+
+  stopStateRefresh() {
+    if (this.stateRefreshInterval) {
+      clearInterval(this.stateRefreshInterval);
+    }
   }
 }
 

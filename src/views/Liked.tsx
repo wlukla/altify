@@ -2,7 +2,6 @@ import React, { useEffect } from 'react';
 import { useRecoilState } from 'recoil';
 import styled from 'styled-components';
 
-import Layout from '../components/Layout';
 import apiService from '../services/apiService';
 import SongsList from '../components/SongsList';
 import { songsListState } from '../store/atoms';
@@ -23,11 +22,9 @@ const LikedView: React.FC = () => {
   }, [setSongs]);
 
   return (
-    <Layout>
-      <Container>
-        <SongsList songs={songs} />
-      </Container>
-    </Layout>
+    <Container>
+      <SongsList songs={songs} />
+    </Container>
   );
 };
 

@@ -3,7 +3,6 @@ import { useRecoilState } from 'recoil';
 import styled from 'styled-components';
 import Button from '../components/Button';
 
-import Layout from '../components/Layout';
 import SongCard from '../components/SongCard';
 import Heading from '../components/Heading';
 import Subheading from '../components/Subheading';
@@ -25,7 +24,7 @@ const ExploreView: React.FC = () => {
   };
 
   return (
-    <Layout>
+    <>
       <InfoContainer>
         <Heading>Random songs</Heading>
         <Subheading>Want to explore Spotify tracks world?</Subheading>
@@ -44,7 +43,7 @@ const ExploreView: React.FC = () => {
           withLike
         />
       )}
-    </Layout>
+    </>
   );
 };
 const InfoContainer = styled.div`
