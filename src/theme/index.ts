@@ -19,7 +19,7 @@ const theme: DefaultTheme = {
       text: '#361D32',
     },
   },
-  font: 'Roboto, Helvetiva, sans-serif',
+  font: 'Roboto, Helvetica, sans-serif',
   breakpoints: {
     sm: '576px',
     md: '768px',

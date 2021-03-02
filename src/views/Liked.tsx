@@ -17,7 +17,7 @@ const LikedView: React.FC = () => {
   useEffect(() => {
     const makeRequest = async () => {
       setIsPending(true);
-      const res = await apiService.getLikedSongs((Number(slug) - 1) * 50);
+      const res = await apiService.getLikedSongs((Number(slug) - 1) * 10);
 
       if (res) {
         setSongs(res);
@@ -39,7 +39,7 @@ const LikedView: React.FC = () => {
       prevStep: numSlug - 1 > 0 ? numSlug - 1 : null,
       currentStep: numSlug,
       nextStep:
-        songs?.total && numSlug * 50 < songs?.total ? numSlug + 1 : null,
+        songs?.total && numSlug * 10 < songs?.total ? numSlug + 1 : null,
     };
   }, [slug, songs]);
 

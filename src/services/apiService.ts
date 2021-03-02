@@ -27,7 +27,7 @@ class ApiService {
     }
   }
 
-  async getLikedSongs(offset = 0, limit = 50) {
+  async getLikedSongs(offset = 0, limit = 10) {
     const url = `https://api.spotify.com/v1/me/tracks?offset=${offset}&limit=${limit}`;
     const data = await this.fetchWithAuthorization<SpotifyApi.UsersSavedTracksResponse>(
       url

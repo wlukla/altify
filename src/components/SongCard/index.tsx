@@ -6,6 +6,7 @@ import Button from '../Button';
 import playerService from '../../services/playerService';
 import apiService from '../../services/apiService';
 import { playbackState, songsListState } from '../../store/atoms';
+import toMMSS from '../../utils/toMMSS';
 
 interface IProps {
   id: string;
@@ -42,13 +43,6 @@ const SongCard: React.FC<IProps> = ({
     }
   };
 
-  const formattedDuration = useMemo(() => {
-    const date = new Date(duration);
-    const stringData = date.toISOString();
-
-    return stringData.slice(14, -5);
-  }, [duration]);
-
   const isDisabled = playerState?.track_window.current_track.id === id;
 
   const isLiked = useMemo(
@@ -62,7 +56,7 @@ const SongCard: React.FC<IProps> = ({
       <SongInfoContainer>
         <Title>{name}</Title>
         <Artists>{artists.join(', ')}</Artists>
-        <Duration>{formattedDuration}</Duration>
+        <Duration>{toMMSS(duration)}</Duration>
       </SongInfoContainer>
       <ButtonsContainer justify={withLike ? 'space-between' : 'flex-end'}>
         {withLike && (
@@ -97,7 +91,20 @@ const Main = styled.article`
   }
 `;
 
-const Image = styled.img``;
+const Image = styled.img`
+  height: 68px;
+  width: 68px;
+
+  @media (min-width: ${({ theme }) => theme.breakpoints.sm}) {
+    height: 108px;
+    width: 108px;
+  }
+
+  @media (min-width: ${({ theme }) => theme.breakpoints.lg}) {
+    height: 138px;
+    width: 138px;
+  }
+`;
 
 const SongInfoContainer = styled.div`
   display: flex;
